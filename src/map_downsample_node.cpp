@@ -25,13 +25,17 @@ class NodeLogic{
             map_downsampled.info.height = int(msg->info.height * msg->info.resolution / res);
             map_downsampled.info.origin = msg->info.origin;
 
+            int stride = int(res / msg->info.resolution);
+            std::cout << "stride: " << stride << std::endl;
+
             for(int i = 0; i < map_downsampled.info.width; i++){
                 for(int j = 0; j < map_downsampled.info.height; j++){
                     // Downsampling logic
                     int free_count = 0; int occ_count = 0; int unk_count = 0;
-                    for(int k = 0; k < int(res / msg->info.resolution); k++){
-                        for(int l = 0; int(res / l < msg->info.resolution); l++){
-                            int occ_val = msg->data[(i * msg->info.resolution / res + k) * msg->info.width + j * msg->info.resolution / res + l];
+
+                    for(int k = 0; k < stride; k++){
+                        for(int l = 0; l < stride; l++){
+                            int occ_val = msg->data[(i * stride + k) * msg->info.width + j * stride + l];
                             if(occ_val >=0 && occ_val <=occ_thresh){
                                 free_count++;
                             }else if(occ_val > occ_thresh){
@@ -53,7 +57,6 @@ class NodeLogic{
                             map_downsampled.data.push_back(-1);
                         }
                     }
-                    std::cout << "occ_count: " << occ_count << ", " << "free count: " << free_count << ", unk count: " << unk_count << std::endl;
                 }
             }
             map_out_pub.publish(map_downsampled);
