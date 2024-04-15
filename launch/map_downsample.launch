@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="map_downsample" name="map_downsample" type="map_downsample_node" output="screen">
+        <param name="resolution" value="0.2"/>
+    </node>
+</launch>

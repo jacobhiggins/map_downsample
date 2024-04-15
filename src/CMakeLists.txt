@@ -1,0 +1,2 @@
+add_executable(map_downsample_node map_downsample_node.cpp)
+target_link_libraries(map_downsample_node ${catkin_LIBRARIES})
