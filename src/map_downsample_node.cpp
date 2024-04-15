@@ -46,14 +46,11 @@ class NodeLogic{
                         }
                     }
                     if (occ_count != 0){
-                        // map_downsampled.data[i * map_downsampled.info.width + j] = 100;
                         map_downsampled.data.push_back(100);
                     } else {
                         if (free_count > unk_count){
-                            // map_downsampled.data[i * map_downsampled.info.width + j] = 0;
                             map_downsampled.data.push_back(0);
                         } else {
-                            // map_downsampled.data[i * map_downsampled.info.width + j] = -1;
                             map_downsampled.data.push_back(-1);
                         }
                     }
